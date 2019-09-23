@@ -14,6 +14,7 @@ var RECT_WIDTH = 40;
 var BETWEEN_RECT = 50;
 var MAX_HEIGHT_RECT = 150;
 
+
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
@@ -46,9 +47,10 @@ window.renderStatistics = function (ctx, names, times) {
     } else {
       ctx.fillStyle = 'rgba(0, 0, 255, ' + Math.random() + ')';
     }
-    ctx.fillRect(CLOUD_X + RETREAT + (RECT_WIDTH + BETWEEN_RECT) * i, Math.round(CLOUD_HEIGHT + CLOUD_Y - RETREAT * 2 - (times[i] / maxElement * MAX_HEIGHT_RECT)), RECT_WIDTH, Math.round(times[i] / maxElement * MAX_HEIGHT_RECT));
+    var ratioToMax = times[i] / maxElement * MAX_HEIGHT_RECT;
+    ctx.fillRect(CLOUD_X + RETREAT + (RECT_WIDTH + BETWEEN_RECT) * i, Math.round(CLOUD_HEIGHT + CLOUD_Y - RETREAT * 2 - ratioToMax), RECT_WIDTH, Math.round(ratioToMax));
     ctx.fillStyle = 'black';
-    ctx.fillText(Math.round(times[i]), (CLOUD_X + RETREAT + (RECT_WIDTH + BETWEEN_RECT) * i) - RETREAT / 2, Math.round((CLOUD_HEIGHT + CLOUD_Y - RETREAT * 2 - (times[i] / maxElement * MAX_HEIGHT_RECT)) - RETREAT / 2));
+    ctx.fillText(Math.round(times[i]), (CLOUD_X + RETREAT + (RECT_WIDTH + BETWEEN_RECT) * i) - RETREAT / 2, Math.round((CLOUD_HEIGHT + CLOUD_Y - RETREAT * 2 - ratioToMax) - RETREAT / 2));
   }
 };
 

@@ -1,5 +1,5 @@
 'use strict';
-'use Math';
+
 var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var CLOUD_HEIGHT = 270;
@@ -42,15 +42,11 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillStyle = '#000';
     ctx.font = FONT_TEXT;
     ctx.fillText(names[i], CLOUD_X + RETREAT + (RECT_WIDTH + BETWEEN_RECT) * i, CLOUD_HEIGHT + CLOUD_Y - RETREAT);
-    if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    } else {
-      ctx.fillStyle = 'rgba(0, 0, 255, ' + Math.random() + ')';
-    }
+    ctx.fillStyle = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'rgba(0, 0, 255, ' + Math.random() + ')';
     var ratioToMax = times[i] / maxElement * MAX_HEIGHT_RECT;
     ctx.fillRect(CLOUD_X + RETREAT + (RECT_WIDTH + BETWEEN_RECT) * i, Math.round(CLOUD_HEIGHT + CLOUD_Y - RETREAT * 2 - ratioToMax), RECT_WIDTH, Math.round(ratioToMax));
     ctx.fillStyle = 'black';
-    ctx.fillText(Math.round(times[i]), (CLOUD_X + RETREAT + (RECT_WIDTH + BETWEEN_RECT) * i) - RETREAT / 2, Math.round((CLOUD_HEIGHT + CLOUD_Y - RETREAT * 2 - ratioToMax) - RETREAT / 2));
+    ctx.fillText(Math.round(times[i]), (CLOUD_X + RETREAT + (RECT_WIDTH + BETWEEN_RECT) * i) , Math.round((CLOUD_HEIGHT + CLOUD_Y - RETREAT * 2 - ratioToMax) - RETREAT / 2));
   }
 };
 

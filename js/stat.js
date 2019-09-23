@@ -46,7 +46,7 @@ window.renderStatistics = function (ctx, names, times) {
     var ratioToMax = times[i] / maxElement * MAX_HEIGHT_RECT;
     ctx.fillRect(CLOUD_X + RETREAT + (RECT_WIDTH + BETWEEN_RECT) * i, Math.round(CLOUD_HEIGHT + CLOUD_Y - RETREAT * 2 - ratioToMax), RECT_WIDTH, Math.round(ratioToMax));
     ctx.fillStyle = 'black';
-    ctx.fillText(Math.round(times[i]), (CLOUD_X + RETREAT + (RECT_WIDTH + BETWEEN_RECT) * i) , Math.round((CLOUD_HEIGHT + CLOUD_Y - RETREAT * 2 - ratioToMax) - RETREAT / 2));
+    ctx.fillText(Math.round(times[i]), (CLOUD_X + RETREAT + (RECT_WIDTH + BETWEEN_RECT) * i), Math.round((CLOUD_HEIGHT + CLOUD_Y - RETREAT * 2 - ratioToMax) - RETREAT / 2));
   }
 };
 

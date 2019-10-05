@@ -3,21 +3,27 @@
 var COUNT_WIZARD = 4;
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
-var COLOR_COAT = ['rgb(101, 137, 164)','rgb(241, 43, 107)','rgb(146, 100, 161)','rgb(56, 159, 117)','rgb(215, 210, 55)','rgb(0, 0, 0)'];
-var COLOR_EYES = ['black','red','blue','yellow','green'];
-var COLOR_FIREBALL_WRAP = ['#ee4830','#30a8ee','#5ce6c0','#e848d5','#e6e848'];
+var COLOR_COAT = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+var COLOR_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
+var COLOR_FIREBALL_WRAP = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
-// всплывающее окно
-var userDialog = document.querySelector('.setup');
-var setupOpen = document.querySelector('.setup-open');
-var setupClose = userDialog.querySelector('.setup-close');
-var setupSubmit = userDialog.querySelector('.setup-submit');
-var formWizard = document.querySelector('.setup-wizard-form');
-var setupWizardCoat = userDialog.querySelector('.wizard-coat');
-
-var onChangeCoat = function () {
-  setupWizardCoat.style = COLOR_COAT[getRandomElement(COLOR_COAT)];
+var getSetup = function (argumentQuery) {
+  return document.querySelector(argumentQuery);
 };
+
+var changeColors = function (changeWizard, arrayColors) {
+  getSetup(changeWizard).style.fill = getRandomElement(arrayColors);
+};
+
+var changeColorsFireball = function (changeWizard, arrayColors) {
+  var color = getRandomElement(arrayColors);
+  getSetup(changeWizard).style.backgroundColor = color;
+  getSetup(changeWizard).querySelector('input').value = color;
+};
+
+// var changeColorsInput = function (inputName, colors) {
+//   getSetup(inputName).value = colors;
+// };
 
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
@@ -25,55 +31,57 @@ var onPopupEscPress = function (evt) {
   }
 };
 
-// document.addEventListener('keydown', function (evt) {
-//   console.log(evt.keyCode);
-// })
-
 var openPopup = function () {
-  userDialog.classList.remove('hidden');
+  getSetup('.setup').classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
 
 var closePopup = function () {
-  userDialog.classList.add('hidden');
+  getSetup('.setup').classList.add('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
 
-setupOpen.addEventListener('click', function () {
+getSetup('.setup-open').addEventListener('click', function () {
   openPopup();
 });
 
-setupOpen.addEventListener('keydown', function (evt) {
+getSetup('.setup-open').addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     openPopup();
   }
 });
 
-setupClose.addEventListener('click', function () {
+getSetup('.setup-close').addEventListener('click', function () {
   closePopup();
 });
 
-setupClose.addEventListener('keydown', function (evt) {
+getSetup('.setup-close').addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closePopup();
   }
 });
 
-setupSubmit.addEventListener('click', function () {
-  formWizard.submit();
+getSetup('.setup-submit').addEventListener('click', function () {
+  getSetup('.setup-wizard-form').submit();
 });
 
-setupSubmit.addEventListener('keydown', function (evt) {
+getSetup('.setup-submit').addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
-    formWizard.submit();
+    getSetup('.setup-wizard-form').submit();
   }
 });
 
-
-setupWizardCoat.addEventListener('click', function () {
-  onChangeCoat();
+getSetup('.wizard-coat').addEventListener('click', function () {
+  changeColors('.wizard-coat', COLOR_COAT);
 });
 
+getSetup('.wizard-eyes').addEventListener('click', function () {
+  changeColors('.wizard-eyes', COLOR_EYES);
+});
+
+getSetup('.setup-fireball-wrap').addEventListener('click', function () {
+  changeColorsFireball('.setup-fireball-wrap', COLOR_FIREBALL_WRAP);
+});
 
 // блок с похожими персонажами
 document.querySelector('.setup-similar').classList.remove('hidden');
@@ -113,6 +121,6 @@ for (var i = 0; i < COUNT_WIZARD; i++) {
 }
 
 similarListElement.appendChild(fragment);
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
+getSetup('.setup-similar').classList.remove('hidden');
 
 
